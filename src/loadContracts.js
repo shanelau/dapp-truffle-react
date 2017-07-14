@@ -36,6 +36,7 @@ async function doSomething() {
 }
 
 export default function (app, window) {
+  /* eslint-disable no-unused-vars */
   return new Promise((resolve, reject) => {
     window.addEventListener('load', () => {
       app.start('#root');

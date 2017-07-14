@@ -22,8 +22,7 @@ contract('10000', (accounts) => {
     const instance = await MetaCoin.deployed(); // 获取合约对象
     const A = accounts[0];  // 创世账号
     const B = accounts[1];  // 第二个账号
-    const result = await instance.sendCoin(B, 1000, { from: A }); // 交易
-    console.log(result);
+    await instance.sendCoin(B, 1000, { from: A }); // 交易
     const ABalance = await instance.getBalance.call(A);  // 获取余额
     const BBalance = await instance.getBalance.call(B);
     assert.equal(ABalance.valueOf(), 9000, "10000 wasn't in the A account");

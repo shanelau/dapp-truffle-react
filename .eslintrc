@@ -5,7 +5,8 @@
     "it": true,
     "contract": true,
     "assert": true,
-    "web3"
+    "web3": true,
+    "window": true
   },
   "rules": {
     "generator-star-spacing": [0],
