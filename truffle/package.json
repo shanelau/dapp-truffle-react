@@ -1,0 +1,22 @@
+{
+  "name": "truffle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate",
+    "test":    "truffle test"
+  },
+  "dependencies": {
+    "truffle-contract": "^2.0.1",
+    "truffle-default-builder": "^2.0.0",
+    "web3": "^0.19.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
