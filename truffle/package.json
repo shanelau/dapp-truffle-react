@@ -8,7 +8,7 @@
   },
   "scripts": {
     "compile": "truffle compile",
-    "migrate": "truffle migrate",
+    "build": "truffle compile && truffle migrate && cp -r ./build/contracts ../src/assets/contracts",
     "test":    "truffle test"
   },
   "dependencies": {

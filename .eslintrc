@@ -6,7 +6,8 @@
     "contract": true,
     "assert": true,
     "web3": true,
-    "window": true
+    "window": true,
+    "require": true
   },
   "rules": {
     "generator-star-spacing": [0],

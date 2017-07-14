@@ -1,15 +1,12 @@
 import Web3 from 'web3';
 import contract from 'truffle-contract';
-import metacoinArtifacts from '../truffle/build/contracts/MetaCoin.json';
 import config from './config';
 
 if (typeof web3 !== 'undefined') {
   window.web3 = new Web3(web3.currentProvider);
 } else {
-  window.web3 = new Web3(new Web3.providers.HttpProvider(config.network.url));
+  window.web3 = new Web3(new Web3.providers.HttpProvider(config.networks.url));
 }
-const MetaCoin = contract(metacoinArtifacts);
-MetaCoin.setProvider(web3.currentProvider);
 
 
 async function doSomething() {
@@ -27,12 +24,23 @@ async function doSomething() {
   });
 
   // 注册合约
-  const meta = await MetaCoin.deployed();
 
-  return Promise.resolve({
+  const keys = Object.keys(config.contracts);
+  const constracts = {};
+  for (const name of keys) {
+    if (config.contracts[name]) {
+      /* eslint-disable import/no-dynamic-require */
+      config.contracts[name] = contract(require(`./assets/contracts/${name}.json`));
+      config.contracts[name].setProvider(web3.currentProvider);
+      constracts[name] = await config.contracts[name].deployed();
+    }
+  }
+  // 注册合约 END
+  window.dapp = {
     accounts,
-    meta,
-  });
+    constracts,
+  };
+  return Promise.resolve(window.dapp);
 }
 
 export default function (app, window) {
