@@ -8,7 +8,7 @@
 4. [testrpc--Fast Ethereum RPC client for testing and development](https://github.com/ethereumjs/testrpc)
 
 ## Get Start
-### testprc
+### 1. Testprc
 
 ```
 npm install -g truffle
@@ -24,7 +24,7 @@ Or
 docker run -d -p 8545:8545 -v /root/testrpc-db:/data/testrpc --name testrpc harshjv/testrpc:latest -a 10 --debug --db /data/testrpc --mem 2048 -b 1
 ```
 
-### truffle
+### 2. Truffle
 ```
 npm install -g truffle
 ```
@@ -34,20 +34,20 @@ npm install -g truffle
 3. `truffle/contracts`, all of contracts
 4. `truffle/test`, mocha test contracts. Command `npm test`.
 
-#### netwokd config
+#### 3 Netwokd config
 
 ```
 config/index.js
 ```
 
-### React framework
+### 4. React framework
 
 ```
 npm start
 ```
 
 
-### loadContracts
+### 5. loadContracts
 1. config contract `config/index.js`
     ```
       contracts: {
@@ -72,13 +72,16 @@ npm start
 3. Use contract
 
 `./src/services/contract.js`
-Example 1:
+
+#### Example 1:
 
 ```
 let MetaCoin = window.dapp.constracts.MetaCoin;
 MetaCoin.sendCoin(xxxx)
 ```
-Example 1:
+
+#### Example 1:
+
 ```
 export async function testContract(dapp) {
   const accounts = dapp.accounts;
@@ -88,4 +91,3 @@ export async function testContract(dapp) {
   console.log(balance.valueOf());
 }
 ```
-
