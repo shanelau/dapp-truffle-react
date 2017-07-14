@@ -5,7 +5,8 @@ import config from './config';
 if (typeof web3 !== 'undefined') {
   window.web3 = new Web3(web3.currentProvider);
 } else {
-  window.web3 = new Web3(new Web3.providers.HttpProvider(config.networks.url));
+  const url = `http://${config.networks.host}:${config.networks.port}`;
+  window.web3 = new Web3(new Web3.providers.HttpProvider(url));
 }
 
 
