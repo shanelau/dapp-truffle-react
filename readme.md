@@ -1,7 +1,7 @@
 
 ## DApp develop demo
 
-### component
+### Component
 1. [truffle--Ethereum development framework](https://github.com/trufflesuite/truffle)
 2. [dva--React and redux based, lightweight and elm-style framework](https://github.com/dvajs/dva)
 3. [web3.js--Ethereum JavaScript API](https://github.com/ethereum/web3.js)
@@ -25,16 +25,17 @@ docker run -d -p 8545:8545 -v /root/testrpc-db:/data/testrpc --name testrpc hars
 ```
 
 ### 2. Truffle
-```
-npm install -g truffle
-```
+
 
 1. `cd truffle`, You could build and migrate your contracts to blockchain.
-2. `npm run migrate`, build and migrate contracts
+    ```
+    npm install -g truffle
+    ```
+2. `npm run build`, build and migrate contracts
 3. `truffle/contracts`, all of contracts
 4. `truffle/test`, mocha test contracts. Command `npm test`.
 
-#### 3 Netwokd config
+### 3 Netwokd config
 
 ```
 config/index.js
@@ -69,25 +70,52 @@ npm start
       }
     }
   ```
-3. Use contract
+### 6. Use contract
+All of contract and web3 will be mount on `window.dapp`;
 
-`./src/services/contract.js`
+```
+window.web3 = web3;
+window.dapp = {
+  web3,
+  accounts,
+  contracts,
+};
+```
 
-#### Example 1:
+#### Example 1
 
 ```
 let MetaCoin = window.dapp.constracts.MetaCoin;
 MetaCoin.sendCoin(xxxx)
 ```
 
-#### Example 1:
+#### Example 2
+
+`./src/services/contract.js`
 
 ```
 export async function testContract(dapp) {
   const accounts = dapp.accounts;
-  const result = await dapp.constracts.MetaCoin.sendCoin(accounts[1], 10, { from: accounts[0] });
+  const result = await dapp.contracts.MetaCoin.sendCoin(accounts[1], 10, { from: accounts[0] });
   console.log(result.valueOf());
-  const balance = await dapp.constracts.MetaCoin.getBalance.call(accounts[0], { from: accounts[0] });
+  const balance = await dapp.contracts.MetaCoin.getBalance.call(accounts[0], { from: accounts[0] });
   console.log(balance.valueOf());
 }
+```
+
+#### Eaxample 3
+
+```
+const accounts = await new Promise((resolve, reject) => {
+  web3.eth.getAccounts((err, result) => {
+    if (err) {
+      return reject(new Error('There was an error fetching your accounts.'));
+    }
+
+    if (!result.length) {
+      return reject(new Error("Couldn't get any accounts! Make sure your Ethereum client is configured correctly."));
+    }
+    resolve(result);
+  });
+});
 ```

@@ -26,19 +26,20 @@ async function doSomething() {
   // 注册合约
 
   const keys = Object.keys(config.contracts);
-  const constracts = {};
+  const contracts = {};
   for (const name of keys) {
     if (config.contracts[name]) {
       /* eslint-disable import/no-dynamic-require */
       config.contracts[name] = contract(require(`./assets/contracts/${name}.json`));
       config.contracts[name].setProvider(web3.currentProvider);
-      constracts[name] = await config.contracts[name].deployed();
+      contracts[name] = await config.contracts[name].deployed();
     }
   }
   // 注册合约 END
   window.dapp = {
+    web3,
     accounts,
-    constracts,
+    contracts,
   };
   return Promise.resolve(window.dapp);
 }
