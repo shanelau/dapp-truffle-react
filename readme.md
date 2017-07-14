@@ -26,16 +26,15 @@ docker run -d -p 8545:8545 -v /root/testrpc-db:/data/testrpc --name testrpc hars
 
 ### 2. Truffle
 
+  ```
+  npm install -g truffle
+  ```
 
 1. `cd truffle`, You could build and migrate your contracts to blockchain.
-    ```
-    npm install -g truffle
-    ```
-2. `npm run build`, build and migrate contracts
-3. `truffle/contracts`, all of contracts
-4. `truffle/test`, mocha test contracts. Command `npm test`.
+2. `npm run build`, Build and migrate contracts
+4. `npm test`, use mocha to test contracts.
 
-### 3 Netwokd config
+### 3 Network config
 
 ```
 config/index.js
@@ -48,28 +47,17 @@ npm start
 ```
 
 
-### 5. loadContracts
-1. config contract `config/index.js`
-    ```
-      contracts: {
-        MetaCoin: true,
-        OtherContract: true,
-        OtherContract: false,  // not load
-      },
-    ```
-2. Load contract `./src/loadContracts.js`
+### 5. Config contracts
+Config contract in file `config/index.js`
 
-  ```
-    const keys = Object.keys(config.contracts);
-    const constracts = {};
-    for (const name of keys) {
-      if (config.contracts[name]) {
-        config.contracts[name] = contract(require(`./assets/contracts/${name}.json`));  // load file
-        config.contracts[name].setProvider(web3.currentProvider); // set Provider
-        constracts[name] = await config.contracts[name].deployed(); // get an instance
-      }
-    }
-  ```
+```
+  contracts: {
+    MetaCoin: true,
+    OtherContract: true,
+    OtherContract: false,  // not load
+  },
+```
+
 ### 6. Use contract
 All of contract and web3 will be mount on `window.dapp`;
 
